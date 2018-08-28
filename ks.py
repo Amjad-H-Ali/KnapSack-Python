@@ -10,27 +10,41 @@ v = [5, 7, 4, 3, 5, 2, 30]
 c = 10
 
 # Result Array to store values of index,capacity pair we've found to prevent from repeating the same computation.
-results = []
-# It will be a 2D array
-for i in range(0, len(w)):
-	results.append([])
+# It will print 2D array: An array of 6 arrays each with 10 None's
+results = [[None] * c] * (len(w))
 
 
 # Function knap_sack:
 	# Arguments: --indx--Index of current item, --capacity--Weight capacity of knapsack
 	# Value: Returns value of best permution of items in knapsack.
-def knap_sack(indx, capcity):
-	value;
+def knap_sack(indx, capacity):
+	value = None
+
 	# If we found solution before, return it.
-	if (results[indx][capacity]):
+	if (indx > 0 and results[indx][capacity]):
 		return results[indx][capacity]
+
 	# Indx less than 0 meainig we went through all items
 	# Capicity equals 0 meaning ks cannot hold more weight.
-	if (indx < 0 || capacity == 0 ):
+	if (indx < 0 or capacity == 0 ):
 		value = 0
+
 	# If weight of item exceeds capacity of ks, move on to next item. 	
 	elif (w[indx] > capacity):
-		knap_sack(indx - 1, capacity)
+		value = knap_sack(indx - 1, capacity)
+
+	# Retrieve greatest value between putting item in ks and moving on to next item.
+	else:
+		# Moving on to next item
+		value1 = knap_sack(indx - 1, capacity)
+
+		# Putting item in ks
+		value2 = v[indx] + knap_sack(indx - 1, capacity - w[indx]) 
+
+		value = max(value1, value2)
+
+
+	return value	 	
 			
 
-
+print(knap_sack(6, c - 1))
