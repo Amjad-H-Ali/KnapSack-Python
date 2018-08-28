@@ -27,6 +27,10 @@ def knap_sack(indx, capcity):
 	# Indx less than 0 meainig we went through all items
 	# Capicity equals 0 meaning ks cannot hold more weight.
 	if (indx < 0 || capacity == 0 ):
-		value = 0;
+		value = 0
+	# If weight of item exceeds capacity of ks, move on to next item. 	
+	elif (w[indx] > capacity):
+		knap_sack(indx - 1, capacity)
+			
 
 
