@@ -11,14 +11,16 @@ c = 10
 
 # Result Array to store values of index,capacity pair we've found to prevent from repeating the same computation.
 results = []
-
+# It will be a 2D array
 for i in range(0, len(w)):
 	results.append([])
 
-print(results)
 
 # Function knap_sack:
 	# Arguments: --indx--Index of current item, --capacity--Weight capacity of knapsack
 	# Value: Returns value of best permution of items in knapsack.
 def knap_sack(indx, capcity):
+	# If we found solution before, return it.
+	if (results[indx][capacity]):
+		return results[indx][capacity]
 
