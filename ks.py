@@ -20,7 +20,13 @@ for i in range(0, len(w)):
 	# Arguments: --indx--Index of current item, --capacity--Weight capacity of knapsack
 	# Value: Returns value of best permution of items in knapsack.
 def knap_sack(indx, capcity):
+	value;
 	# If we found solution before, return it.
 	if (results[indx][capacity]):
 		return results[indx][capacity]
+	# Indx less than 0 meainig we went through all items
+	# Capicity equals 0 meaning ks cannot hold more weight.
+	if (indx < 0 || capacity == 0 ):
+		value = 0;
+
 
