@@ -7,11 +7,15 @@ w = [3, 9, 2, 1, 7, 3, 11]
 v = [5, 7, 4, 3, 5, 2, 30]
 
 # Weight Capacity of Knapsack
-c = 10
+cap = 10
 
-# Result Array to store values of index,capacity pair we've found to prevent from repeating the same computation.
-# It will print 2D array: An array of 6 arrays each with 10 None's
-results = [[None] * c] * (len(w))
+# Dict to store values from output of function to prevent computing same input
+# results = {
+# 	0:{0:None, 1:None, ...}
+#	...
+# }
+results = { i:{j: None for j in range(cap + 1)} for i in range(len(w)) }
+
 
 
 # Function knap_sack:
@@ -21,12 +25,12 @@ def knap_sack(indx, capacity):
 	value = None
 
 	# If we found solution before, return it.
-	if (indx > 0 and results[indx][capacity]):
+	if (indx >= 0 and results[indx][capacity]):
 		return results[indx][capacity]
 
 	# Indx less than 0 meainig we went through all items
 	# Capicity equals 0 meaning ks cannot hold more weight.
-	if (indx < 0 or capacity == 0 ):
+	if (indx == -1 or capacity == 0 ):
 		value = 0
 
 	# If weight of item exceeds capacity of ks, move on to next item. 	
@@ -43,8 +47,11 @@ def knap_sack(indx, capacity):
 
 		value = max(value1, value2)
 
-
+	# Before returning, store value in Dict to prevent redundancy.
+	if(indx >= 0 ):
+		results[indx][capacity] = value
 	return value	 	
 			
 
-print(knap_sack(6, c - 1))
+print(knap_sack(6, cap))
+
